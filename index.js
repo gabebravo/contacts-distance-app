@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const axios = require('axios');
-const dotenv = require('dotenv');
 dotenv.config();
 
 // const pino = require('express-pino-logger')();
@@ -11,7 +10,7 @@ dotenv.config();
 
 const app = express();
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 function getMiles(i) {
   return parseFloat((i*0.000621371192).toFixed(2))
@@ -34,10 +33,10 @@ app.get('/api/map-data/:origin/:destination', (req, res) => {
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'../client/build/index.html'));
+  res.sendFile(path.join(__dirname+'client/build/index.html'));
 });
 
 const port = process.env.PORT || 5000;
 app.listen(port);
 
-console.log(`Password generator listening on ${port}`);
+console.log(`app listening on ${port}`);
