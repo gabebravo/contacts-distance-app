@@ -2,12 +2,15 @@ const express = require('express');
 const axios = require('axios');
 const dotenv = require('dotenv');
 dotenv.config();
+
 // const pino = require('express-pino-logger')();
+// app.use(pino);
 // const bodyParser = require('body-parser');
+// app.use(bodyParser.urlencoded({ extended: false }));
 
 const app = express();
-// app.use(pino);
-// app.use(bodyParser.urlencoded({ extended: false }));
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 function getMiles(i) {
   return parseFloat((i*0.000621371192).toFixed(2))
