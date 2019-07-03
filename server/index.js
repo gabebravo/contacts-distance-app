@@ -1,11 +1,13 @@
 const express = require('express');
-// const bodyParser = require('body-parser');
-// const pino = require('express-pino-logger')();
 const axios = require('axios');
+const dotenv = require('dotenv');
+dotenv.config();
+// const pino = require('express-pino-logger')();
+// const bodyParser = require('body-parser');
 
 const app = express();
-// app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(pino);
+// app.use(bodyParser.urlencoded({ extended: false }));
 
 function getMiles(i) {
   return parseFloat((i*0.000621371192).toFixed(2))
@@ -13,7 +15,7 @@ function getMiles(i) {
 
 app.get('/api/map-data/:origin/:destination', (req, res) => {
   const { origin, destination } = req.params;
-  const URL = `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}&destinations=${destination}&key=${process.env.REACT_APP_GOOGLE_KEY}`
+  const URL = `https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=${origin}&destinations=${destination}&key=${process.env.GOOGLE_KEY}`
     axios.get(URL)
       .then(response => {
         const miles = getMiles(response.data.rows[0].elements[0].distance.value);
