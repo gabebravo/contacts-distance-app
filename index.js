@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const axios = require('axios');
-dotenv.config();
 
 // const pino = require('express-pino-logger')();
 // app.use(pino);
