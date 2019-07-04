@@ -1,5 +1,7 @@
 ## Contacts Distance App
 
+Deployed: [https://contacts-distance-app.herokuapp.com](https://contacts-distance-app.herokuapp.com)
+
 In the project directory, you can run:
 
 ### `npm dev`
