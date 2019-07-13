@@ -54,6 +54,10 @@ const useStyles = makeStyles(theme => ({
     textAlign: 'center',
     color: theme.palette.text.secondary
   },
+  listPaper: {
+    padding: theme.spacing(2),
+    color: theme.palette.text.secondary
+  },
   addressField: {
     width: '80%',
     marginBottom: 20
@@ -208,7 +212,7 @@ export default function ProviderSearch() {
         <div className={classes.listWrapper}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <Paper className={classes.paper}>
+              <Paper className={classes.listPaper}>
                 <div>{renderProviders()}</div>
               </Paper>
             </Grid>

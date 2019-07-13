@@ -1,46 +1,47 @@
 import React from 'react';
-import { styled } from '@material-ui/styles';
 import Divider from '@material-ui/core/Divider';
+import Grid from '@material-ui/core/Grid';
+import Hidden from '@material-ui/core/Hidden';
 
-const ListWrapper = styled('div')({
-  display: 'flex',
-  paddingTop: '1rem',
-  paddingBottom: '1.5rem',
-  fontSize: '1.125rem;'
-});
-
-const getItemWidth = column => {
-  switch( column ){
-    case 'miles':
-      return '10%'
-    case 'provider':
-      return '30%'
-    case 'address':
-      return '50%'
-    case 'zip':
-      return '10%'
-    default:
-      return 
+const styles = {
+  xsRoot: {
+    fontFamily: 'sans-serif',
+    padding: '10px 0px'
+  },
+  mdRoot: {
+    fontFamily: 'sans-serif',
+    minHeight: '6rem',
+    alignItems: 'center'
+  },
+  spanStyles: {
+    display: 'inline-block',
+    fontWeight: 'bold'
   }
-}
-
-const ListItem = styled('div')(props => ({
-  width: getItemWidth(props.column),
-  display: 'flex',
-  justifyContent: props.end === "true" ? 'center' : 'start'
-}));
+};
 
 export default function SimpleList(props) {
-  const { miles, providerGroup, address, city, zipcode } = props
+  const { miles, providerGroup, address, city, zipcode } = props;
   return (
     <>
-      <ListWrapper>
-        <ListItem column="miles">{`miles: ${miles}`}</ListItem>
-        <ListItem column="provider">{providerGroup}</ListItem>
-        <ListItem column="address">{`${address}, ${city}`}</ListItem>
-        <ListItem column="zip" end="true">{zipcode}</ListItem>
-      </ListWrapper>
+      <Hidden mdUp>
+        <Grid container style={styles.xsRoot} spacing={3}>
+          <Grid item xs={4}>
+            <span style={styles.spanStyles}>{`miles: ${miles}`}</span>
+            {providerGroup}
+          </Grid>
+          <Grid item xs={8} md={false}>{`${address}, ${city} ${zipcode}`}</Grid>
+        </Grid>
+      </Hidden>
+      <Hidden only="xs">
+        <Grid container style={styles.mdRoot} spacing={3}>
+          <Grid item md={2}>{`miles: ${miles}`}</Grid>
+          <Grid item md={4}>
+            {providerGroup}
+          </Grid>
+          <Grid item md={6}>{`${address}, ${city} ${zipcode}`}</Grid>
+        </Grid>
+      </Hidden>
       <Divider />
     </>
-  )
+  );
 }
